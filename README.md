@@ -1,4 +1,5 @@
 ----------
+Note: this is a fork from the rigbox repository: https://github.com/cortex-lab/Rigbox
 # Rigbox
 ![Coverage badge](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fsilent-zebra-36.tunnel.datahub.at%2Fcoverage%2Frigbox%2Fmaster)
 ![Build status badge](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fsilent-zebra-36.tunnel.datahub.at%2Fstatus%2Frigbox%2Fmaster)
