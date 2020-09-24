@@ -7,13 +7,31 @@ function plot2AUFC(ax, block)
 contrast = [];
 contrast(1,:) = [block.trial.contrastLeft];
 contrast(2,:) = [block.trial.contrastRight];
+
+% disp('Contrast left:')
+% disp([block.trial.contrastLeft])
+% 
+% disp('Contrast right:')
+% disp([block.trial.contrastRight])
 % contrast = diff(contrast);
+
 response = [block.trial.response];
+
+if numel(response) == 10
+    disp('here')
+end
+% disp('Response:');
+% disp(response);
 repeatNum = [block.trial.repeatNum];
 incl = ~any(isnan([contrast;response;repeatNum]));
 contrast = contrast(:,incl);
 response = response(incl);
-repeatNum = repeatNum(incl);
+
+% To ignore repeatNum when plotting psychometric curves LMN
+%repeatNum = repeatNum(incl);
+repeatNum = repeatNum * 0 + 1;
+
+
 % if any(structfun(@isnan, block.trial(end))) % strip incomplete trials
 %   contrast = contrast(:,1:end-1);
 %   response = response(1:end-1);
@@ -61,7 +79,7 @@ if any(contrast(1,:)>0 & contrast(2,:)>0)
   for r = 1:numRespTypes-1
     plot(ax, nCR*r+[0.5 0.5], [0.5 nCL+0.5], 'Color', [0.8 0.8 0.8], 'LineWidth', 2.0);
   end
-  
+    
   xlim(ax, [0.5 nCR*numRespTypes+0.5])
   ylim(ax, [0.5 nCL+0.5])
   caxis(ax, [-1 1]);
@@ -86,6 +104,8 @@ else
     errorbar(ax, 100*cVals, 100*psychoM(r,:), 100*psychoMCI(r,:),...
       '-o', 'Color', colors(r,:), 'LineWidth', 1.0);
   end
+  disp(psychoM);
+  
   
   ylim(ax, [-1 101]);
   xdata = cVals(~isnan(cVals))*100;

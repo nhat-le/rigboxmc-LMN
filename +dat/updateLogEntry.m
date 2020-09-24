@@ -29,6 +29,10 @@ idx = [log.id] == id;
 %ensure one and only one entry with id
 assert(sum(idx) == 1, 'Multiple entries with the same id');
 %update
+
+%LMN 07.08.2020
+newEntry = rmfield(newEntry, 'AlyxInstance');
+
 log(idx) = newEntry;
 %store new log to all repos locations
 superSave(dat.logPath(subject), struct('log', log));
